@@ -11,3 +11,7 @@ const UserSchema = new mongoose.Schema({
   ftBeer: [],
   trades: []
 });
+
+UserSchema.methods.hashPassword = function(password) {
+  return bcrypt.hashSync(password, brypt.genSaltSync(10));
+};
