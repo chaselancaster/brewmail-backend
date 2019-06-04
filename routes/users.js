@@ -17,6 +17,32 @@ router.post("/register", async (req, res) => {
       });
     }
   } catch (err) {
+    console.log(err);
+  }
+});
+
+// Login
+router.post("/login", async (req, res) => {
+  console.log("login post route hit");
+  try {
+    const foundUser = await User.findOne({
+      username: req.body.username
+    });
+    if (foundUser) {
+      if (bcrypt.compareSync(req.body.password, foundUser.password)) {
+        req.session.dbId = foundUser._id;
+        req.session.logged = true;
+        res.json({
+          user: foundUser,
+          success: true
+        });
+      } else {
+        res.json({
+          message: "Invalid username or password"
+        });
+      }
+    }
+  } catch (err) {
     res.json({ err });
   }
 });

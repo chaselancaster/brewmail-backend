@@ -22,7 +22,7 @@ UserSchema.methods.hashCompare = function(password) {
 
 UserSchema.pre("save", function(next) {
   if (this.isModified("password")) {
-    this.password = this.hasPassword(this.password);
+    this.password = this.hashPassword(this.password);
   }
   next();
 });
