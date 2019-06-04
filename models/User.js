@@ -15,3 +15,7 @@ const UserSchema = new mongoose.Schema({
 UserSchema.methods.hashPassword = function(password) {
   return bcrypt.hashSync(password, brypt.genSaltSync(10));
 };
+
+UserSchema.methods.hashCompare = function(password) {
+  return bcrypt.compareSync(password, this.password);
+};
