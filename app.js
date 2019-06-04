@@ -9,6 +9,7 @@ const PORT = process.env.PORT;
 
 require("./db/db");
 
+// Routes
 // const apiRouter = require("./routes/api");
 // const userRouter = require("./routes/users");
 
