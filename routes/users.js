@@ -47,4 +47,25 @@ router.post("/login", async (req, res) => {
   }
 });
 
+// Finding logged in user info
+router.get("/profile", async (req, res) => {
+  try {
+    const user = await User.findById(req.session.dbId);
+    console.log(user, "<-- user in get route");
+    res.json({ user });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+// Getting all users
+router.get("/", async (req, res) => {
+  try {
+    const allUsers = await User.find({});
+    res.json({ allUsers });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 module.exports = router;
