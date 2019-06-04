@@ -11,7 +11,7 @@ require("./db/db");
 
 // Routes
 // const apiRouter = require("./routes/api");
-// const userRouter = require("./routes/users");
+const userRouter = require("./routes/users");
 
 const app = express();
 
@@ -28,7 +28,7 @@ app.use(
   })
 );
 
-// app.use("/users", userRouter);
+app.use("/users", userRouter);
 
 // Catching error
 app.use((req, res, next) => {
