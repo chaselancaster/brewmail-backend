@@ -4,13 +4,13 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
 const session = require("express-session");
-
 require("dotenv").config();
+const PORT = process.env.PORT;
 
 require("./db/db");
 
 // const apiRouter = require("./routes/api");
-const userRouter = require("./routes/users");
+// const userRouter = require("./routes/users");
 
 const app = express();
 
@@ -27,11 +27,15 @@ app.use(
   })
 );
 
-app.use("/users", userRouter);
+// app.use("/users", userRouter);
 
 // Catching error
 app.use((req, res, next) => {
   next(createError(404));
+});
+
+app.listen(PORT, err => {
+  console.log(err || "App is listening on port, ", PORT);
 });
 
 module.exports = app;
