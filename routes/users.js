@@ -78,4 +78,27 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// Updating user
+router.put("/update/:id", async (req, res) => {
+  const userId = req.session.dbId || req.params.id;
+  try {
+    const user = await User.findById(userId);
+    console.log(user, "<-- user in update route");
+    if (!req.body.password) {
+      delete req.body.password;
+    } else {
+      req.body.password = user.hashPassword(req.body.password);
+      console.log(req.body.password, "<-- req.body.password after hashed");
+    }
+    const updatedUser = await User.findByIdAndUpdate(userId, req.body, {
+      new: true
+    });
+    console.log(req.body, "<-- req.body");
+    console.log(updatedUser, "<-- updatedUser");
+    res.json({ updatedUser });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 module.exports = router;
