@@ -68,4 +68,14 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Get users by id
+router.get("/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    res.json({ user });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 module.exports = router;
