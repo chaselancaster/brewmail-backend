@@ -16,3 +16,5 @@ router.get("/:beer", async (req, res) => {
     success: true
   });
 });
+
+module.exports = router;
