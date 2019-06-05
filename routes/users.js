@@ -101,4 +101,18 @@ router.put("/update/:id", async (req, res) => {
   }
 });
 
+// Logout user route
+router.get("/logout", (req, res) => {
+  req.session.destroy(err => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json({
+        success: true,
+        message: "You have logged out!"
+      });
+    }
+  });
+});
+
 module.exports = router;
