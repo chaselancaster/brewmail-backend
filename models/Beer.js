@@ -8,7 +8,8 @@ const BeerSchema = new mongoose.Schema({
   quantity: { type: Number },
   year: { type: String },
   size: { type: String },
-  label: { type: String }
+  label: { type: String },
+  isForTrade: { type: Boolean }
 });
 
 module.exports = mongoose.model("Beer", BeerSchema);
