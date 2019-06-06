@@ -32,6 +32,9 @@ router.post("/login", async (req, res) => {
       if (bcrypt.compareSync(req.body.password, foundUser.password)) {
         req.session.dbId = foundUser._id;
         req.session.logged = true;
+        req.session.save();
+        console.log(foundUser._id, "user id");
+        console.log(req.session, "session");
         res.json({
           user: foundUser,
           success: true

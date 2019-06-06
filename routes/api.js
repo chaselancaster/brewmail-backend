@@ -11,6 +11,7 @@ router.get("/:beer", async (req, res) => {
   );
   const parsedBeer = await beer.json();
   console.log(parsedBeer, "<-- parsedBeer in beer get route");
+  console.log(req.session);
   res.json({
     data: parsedBeer,
     success: true
