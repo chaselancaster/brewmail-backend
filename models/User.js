@@ -8,7 +8,6 @@ const UserSchema = new mongoose.Schema({
   location: { type: String },
   cellarBeer: [],
   isoBeer: [],
-  ftBeer: [],
   trades: []
 });
 
