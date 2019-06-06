@@ -11,4 +11,4 @@ const BeerSchema = new mongoose.Schema({
   label: { type: String }
 });
 
-export default BeerSchema;
+module.exports = mongoose.model("Beer", BeerSchema);
