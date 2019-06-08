@@ -61,4 +61,35 @@ router.post("/add/iso", async (req, res) => {
   }
 });
 
+// Find users that have the user's ISO beer in their FT // GET
+// I need to see which beers the logged in user has in their ISO
+// I need search through all the user's cellar's and see if any of their beer matches the
+// current user's ISO beers
+// I need to return a list of those users and which beers they have that are a match
+router.get("/matches/:beername", async (req, res) => {
+  try {
+    // const currentUser = await User.findById(req.params.id);
+    // const currentUserISOBeerNames = [];
+    // for (let i = 0; i < currentUser.isoBeer.length; i++) {
+    //   currentUserISOBeerNames.push(currentUser.isoBeer[i].beerName);
+    // }
+    // console.log(currentUserISOBeerNames, "<-- currentUserISOBeerNames array");
+    // console.log(currentUser, "<-- currentUser");
+    // const allUsers = []
+    // for (let i = 0; i < currentUserISOBeerNames.length; i++) {
+    //     currentUserISOBeerNames[i]
+    // }
+    const allUsers = await User.find({
+      "cellarBeer.isForTrade": true,
+      "cellarBeer.beerName": `${req.params.beername}`
+    });
+    // allUsers.filter(user => user.cellarBeer.filter(beer => beer));
+    res.json({ allUsers });
+    // console.log(currentUser, "<-- currentUser");
+    console.log(allUsers, "<-- allUsers");
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 module.exports = router;
