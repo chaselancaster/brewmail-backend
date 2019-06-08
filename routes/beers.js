@@ -66,8 +66,9 @@ router.post("/add/iso", async (req, res) => {
 // I need search through all the user's cellar's and see if any of their beer matches the
 // current user's ISO beers
 // I need to return a list of those users and which beers they have that are a match
-router.get("/matches/:beername", async (req, res) => {
+router.get("/matches/:beer", async (req, res) => {
   try {
+    console.log(req.params.beer, "<-- req.params.beer");
     // const currentUser = await User.findById(req.params.id);
     // const currentUserISOBeerNames = [];
     // for (let i = 0; i < currentUser.isoBeer.length; i++) {
@@ -81,7 +82,7 @@ router.get("/matches/:beername", async (req, res) => {
     // }
     const allUsers = await User.find({
       "cellarBeer.isForTrade": true,
-      "cellarBeer.beerName": `${req.params.beername}`
+      "cellarBeer.beerName": `${req.params.beer}`
     });
     // allUsers.filter(user => user.cellarBeer.filter(beer => beer));
     res.json({ allUsers });
