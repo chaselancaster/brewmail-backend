@@ -7,9 +7,7 @@ const TradeSchema = new mongoose.Schema({
   user2Address: { type: String },
   isComplete: { type: Boolean },
   createdBy: {},
-  tradingPartner: {},
-  user1Confirmation: { type: Boolean },
-  user2Confirmation: { type: Boolean }
+  tradingPartner: {}
 });
 
 module.exports = mongoose.model("Trade", TradeSchema);
