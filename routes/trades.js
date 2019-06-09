@@ -18,9 +18,9 @@ router.post("/create/:currentUserId/:tradingPartnerId", async (req, res) => {
     createdTrade.id = createdId;
     console.log(createdTrade, "<-- createdTrade after adding id");
     // push trade into tradeCreator's and tradePartner's trades array
-    tradeCreator.trades.push(req.body);
+    tradeCreator.trades.push(createdTrade);
     tradeCreator.save();
-    tradePartner.trades.push(req.body);
+    tradePartner.trades.push(createdTrade);
     tradePartner.save();
     // console.log(tradeCreator, "<-- tradeCreator after trade has been added");
     // console.log(tradePartner, "<-- tradePartner after trade has been added");
