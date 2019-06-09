@@ -7,7 +7,8 @@ const TradeSchema = new mongoose.Schema({
   partnerAddress: { type: String },
   isComplete: { type: Boolean },
   createdBy: {},
-  tradingPartner: {}
+  tradingPartner: {},
+  id: { type: String }
 });
 
 module.exports = mongoose.model("Trade", TradeSchema);
