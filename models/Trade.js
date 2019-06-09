@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const TradeSchema = new mongoose.Schema({
   creatorBeer: [],
   partnerBeer: [],
-  user1Address: { type: String },
-  user2Address: { type: String },
+  creatorAddress: { type: String },
+  partnerAddress: { type: String },
   isComplete: { type: Boolean },
   createdBy: {},
   tradingPartner: {}
