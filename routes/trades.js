@@ -1,16 +1,31 @@
 const express = require("express");
 const router = express.Router();
 
-router.post("/createtrade", async (req, res) => {
+const uuidv1 = require("uuid/v1");
+
+const User = require("../models/User");
+
+router.post("/create/:currentUserId/:tradingPartnerId", async (req, res) => {
   try {
-    console.log(req.session.dbId, "req.session.dbId");
-    const currentUser = await User.findById(req.body.currentUser._id);
-    console.log(currentUser, "currentUser");
-    delete req.body.currentUser;
-    currentUser.trades.push(req.body);
-    currentUser.save();
+    const createdId = uuidv1();
+    // console.log(createdId, "<-- createdId");
+    const tradeCreator = await User.findById(req.params.currentUserId);
+    const tradePartner = await User.findById(req.params.tradingPartnerId);
+    // console.log(tradeCreator, "<-- tradeCreator in create trade function");
+    // console.log(tradePartner, "<-- tradePartner in create trade function");
+    const createdTrade = req.body;
+    console.log(createdTrade, "<-- createdTrade");
+    createdTrade.id = createdId;
+    console.log(createdTrade, "<-- createdTrade after adding id");
+    // push trade into tradeCreator's and tradePartner's trades array
+    tradeCreator.trades.push(createdTrade);
+    tradeCreator.save();
+    tradePartner.trades.push(createdTrade);
+    tradePartner.save();
+    // console.log(tradeCreator, "<-- tradeCreator after trade has been added");
+    // console.log(tradePartner, "<-- tradePartner after trade has been added");
     res.json({
-      currentUser: currentUser,
+      currentUser: tradeCreator,
       success: true,
       message: "Trade has been created"
     });
@@ -18,3 +33,5 @@ router.post("/createtrade", async (req, res) => {
     console.log(err);
   }
 });
+
+module.exports = router;

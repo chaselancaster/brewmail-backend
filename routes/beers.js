@@ -93,4 +93,18 @@ router.get("/matches/:beer", async (req, res) => {
   }
 });
 
+// Delete beer
+router.delete("/delete/:beerid/:currentUserId", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.currentUserId);
+    console.log(user, "user in delete route");
+    user.cellarBeer.splice(req.params.beerid, 1);
+    user.save();
+    console.log(user);
+    res.json({ user, success: true, message: "Beer deleted" });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 module.exports = router;

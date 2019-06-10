@@ -13,6 +13,7 @@ require("./db/db");
 const apiRouter = require("./routes/api");
 const userRouter = require("./routes/users");
 const beerRouter = require("./routes/beers");
+const tradeRouter = require("./routes/trades");
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.use(cors());
 app.use("/users", userRouter);
 app.use("/api", apiRouter);
 app.use("/beer", beerRouter);
+app.use("/trade", tradeRouter);
 
 // Catching error
 app.use((req, res, next) => {
